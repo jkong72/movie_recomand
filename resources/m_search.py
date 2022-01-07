@@ -1,11 +1,8 @@
-from flask_jwt_extended.utils import get_jwt_identity
-from flask_jwt_extended.view_decorators import jwt_required
 from flask_restful import Resource
 from flask import request
 from http import HTTPStatus
-from flask.json import jsonify
-
 from mysql.connector.errors import Error
+
 from utils_MySQL_connection import get_cnx
 
 
@@ -66,3 +63,5 @@ class MovieSearchResource(Resource):
 
                 
         return {'count':len(record_list), 'movie_list':record_list}, HTTPStatus.OK
+
+

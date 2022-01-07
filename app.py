@@ -2,10 +2,12 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from config import Config
+from resources.f_favorite import FavoriteSwitchResource
+from resources.f_myfavorite import FavoriteListResource
 from resources.m_detail import MovieDetailResource
 from resources.m_movie import MovieListResource
 from resources.m_search import MovieSearchResource
-from resources.r_review import ReviewCreateResource
+from resources.r_review import ReviewListResource
 from resources.u_info import UserInformationResource
 from resources.u_login import UserLoginResource
 from resources.u_logout import LogoutResource, jwt_blacklist
@@ -30,9 +32,9 @@ api.add_resource(UserInformationResource, '/api/v1/user/me') #내 정보
 api.add_resource(MovieListResource, '/api/v1/movie') #모든 영화 보기 (25/페이지)
 api.add_resource(MovieSearchResource,'/api/v1/movie/search') #영화 검색 (25/페이지)
 api.add_resource(MovieDetailResource,'/api/v1/movie/<int:movie_id>') #영화 상세 정보
-api.add_resource(ReviewCreateResource,'/api/v1/movie/<int:movie_id>/review') #영화별 리뷰 보기 및 리뷰 작성
-# api.add_resource(,'/api/v1/favorite/<int:movie_id>') #즐겨찾기 설정/해제
-# api.add_resource(,'api/v1/favorite/) #내 즐겨찾기
+api.add_resource(ReviewListResource,'/api/v1/movie/<int:movie_id>/review') #영화별 리뷰 보기 및 리뷰 작성, 삭제, 수정
+api.add_resource(FavoriteSwitchResource,'/api/v1/movie/<int:movie_id>/favorite') #즐겨찾기 설정/해제
+api.add_resource(FavoriteListResource, '/api/v1/favorite') #내 즐겨찾기
 
 
 

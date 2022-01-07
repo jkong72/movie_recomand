@@ -1,13 +1,12 @@
 from flask_restful import Resource
 from http import HTTPStatus
 from flask import request
-
-from utils_MySQL_connection import get_cnx
-
 from mysql.connector.errors import Error
 from email_validator import validate_email, EmailNotValidError
 from flask_jwt_extended import create_access_token
 from utils_p2h import hash_password
+
+from utils_MySQL_connection import get_cnx
 
 
 class UserRegisterResource(Resource):
@@ -34,22 +33,25 @@ class UserRegisterResource(Resource):
 
         # MySQL
         try:
-            cnx = get_cnx()
+            cnx = get_cnx() #DB와 연결
             
+            #MySQL (쿼리문)
             query = '''insert into user
                     (email, password, name, gender)
                     values
                     (%s, %s, %s, %s);'''
             
+            #변수 지정
             record = (
                 data['email'],
                 hashed_pw,
                 data['name'],
                 data['gender'])
             
-            cursor = cnx.cursor()
-            cursor.execute(query,record)
-            cnx.commit()
+            cursor = cnx.cursor() #커서 가져오기
+            cursor.execute(query,record) #커서 실행
+            cnx.commit() #실행 반영
+            
             user_id = cursor.lastrowid #DB 내 users 테이블의 id
 
         except Error as e:
