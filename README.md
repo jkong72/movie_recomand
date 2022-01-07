@@ -1,7 +1,6 @@
 # movie_recomand
 
 ## 관련 외부 링크
----
 관련 GitBook   
 https://while-true-learn-api.gitbook.io/app-restful-api-1/api-reference/api/api
 
