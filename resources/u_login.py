@@ -46,6 +46,7 @@ class UserLoginResource(Resource):
         if len (record_list) == 0: 
             return {'error': '가입된 이메일이 없습니다.'}, HTTPStatus.BAD_REQUEST #없는 이메일 에러/응답
 
+        
         if  check_password(data['password'], record_list[0]['password']) == False:
             return {'error': '비밀번호가 일치하지 않습니다.'}, HTTPStatus.UNAUTHORIZED
 
