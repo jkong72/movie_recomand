@@ -9,7 +9,7 @@ from utils_MySQL_connection import get_cnx
 
 
 class ReviewListResource(Resource):
-    def get(self, movie_id) : #내가 작성한 리뷰 보기
+    def get(self, movie_id) : #선택한 영화의 리뷰 보기
         try:
             cnx = get_cnx()
 
