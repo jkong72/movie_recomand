@@ -10,31 +10,31 @@ class FavoriteSwitchResource(Resource) :
     @jwt_required(optional=False)
     def post(self, movie_id) :
 
-        try :
-            # 1. DB 에 연결
-            cnx = get_cnx()        
-            user_id = get_jwt_identity()
+        try :            
+            cnx = get_cnx() #DB와 통신
+            user_id = get_jwt_identity() # 인증 토큰 불러오기
             
-            # 2. 쿼리문 만들고
+            # MySQL (쿼리문)
             query = '''insert
                         into favorite
                             (user_id, movie_id)
                         value (%s, %s);'''
 
-            record = (user_id , movie_id)
-            cursor = cnx.cursor()
-            cursor.execute(query, record)
-            cnx.commit()
+            record = (user_id , movie_id) #MySQL 변수 지정
+            cursor = cnx.cursor() #연결에서 커서 가져오기
+            cursor.execute(query, record) #쿼리문과 변수를 커서로 실행
+            cnx.commit() #DB에 반영(commit)
 
-        except Error as e:
-            print('Error ', e)
-            return {'error' : str(e)} , HTTPStatus.BAD_REQUEST
-        finally :
+        except Error as e: #예외처리
+            print('Error ', e) #에러/터미널
+            return {'error' : str(e)} , HTTPStatus.BAD_REQUEST #에러/응답(반환)
+        finally : #커서 폐쇄
             if cnx.is_connected():
                 cursor.close()
                 cnx.close()
                 print('MySQL connection is closed')
 
+        #최종 응답
         return {'result' : '즐겨찾기에 추가 되었습니다.'},HTTPStatus.OK
 
 
