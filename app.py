@@ -6,6 +6,8 @@ from resources.f_favorite import FavoriteSwitchResource
 from resources.f_myfavorite import FavoriteListResource
 from resources.m_detail import MovieDetailResource
 from resources.m_movie import MovieListResource
+from resources.m_recomand import MovieRecommandResource
+from resources.m_recomand_2 import AdvancedMovieRecommandResource
 from resources.m_search import MovieSearchResource
 from resources.r_review import ReviewListResource
 from resources.u_info import UserInformationResource
@@ -35,6 +37,9 @@ api.add_resource(MovieDetailResource,'/api/v1/movie/<int:movie_id>') #영화 상
 api.add_resource(ReviewListResource,'/api/v1/movie/<int:movie_id>/review') #영화별 리뷰 보기 및 리뷰 작성, 삭제, 수정
 api.add_resource(FavoriteSwitchResource,'/api/v1/movie/<int:movie_id>/favorite') #즐겨찾기 설정/해제
 api.add_resource(FavoriteListResource, '/api/v1/favorite') #내 즐겨찾기
+api.add_resource(AdvancedMovieRecommandResource, '/api/v1/user/recommand') #영화 추천(개선)
+# api.add_resource(MovieRecommandResource, '/api/v1/user/recommand') #영화 추천
+
 
 
 
