@@ -65,7 +65,7 @@ class AdvancedMovieRecommandResource(Resource):
             recom_movie = userid_movietitle_matrix.corr()                            
 
 
-            # 실제 추천 부분
+            # 실제 추천 기능 부분
             query = '''select
                         r.id,
                         r.user_id,
